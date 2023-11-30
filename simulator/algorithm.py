@@ -2,6 +2,14 @@ def first_come_first_served():
     pass
 
 
+def fcfs():
+    first_come_first_served()
+
+
+def FCFS():
+    first_come_first_served()
+
+
 def round_robin():
     pass
 
