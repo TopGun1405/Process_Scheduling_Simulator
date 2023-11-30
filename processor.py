@@ -3,8 +3,8 @@ class Processor:
         self.readyQueue = []
         self.name = name
 
-    def __len__(self):
-        pass
+    def __len__(self) -> int:
+        return len(self.readyQueue)
 
     def __str__(self) -> str:
         text = (
