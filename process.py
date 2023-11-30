@@ -25,7 +25,7 @@ class Process:
         )
         return text
 
-    def __getitem__(self, key=str):
+    def __getitem__(self, key=str) -> any:
         info = {
             'name': self.name,
             'AT': self.arrival_time,
@@ -34,4 +34,7 @@ class Process:
             'TT': self.turnAround_time,
             'NTT': self.normalized_turnAround_time
         }
-        return info[key]
+        try:
+            return info[key]
+        except KeyError:
+            print("KeyError")
