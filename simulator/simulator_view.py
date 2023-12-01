@@ -1,6 +1,8 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow
 
+from simulator import Simulator
+
 
 class SimulatorView(QWidget):
     def __init__(self):
