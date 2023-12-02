@@ -1,5 +1,6 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow
+from PyQt6.QtWidgets import QLabel, QPushButton
 
 from simulator import Simulator
 
@@ -7,6 +8,8 @@ from simulator import Simulator
 class SimulatorView(QWidget):
     def __init__(self):
         super().__init__()
+
+        newSimulator = Simulator()
 
         self.setWindowTitle("Process Scheduling Simulator")
         self.show()
