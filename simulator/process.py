@@ -37,4 +37,8 @@ class Process:
         try:
             return info[key]
         except KeyError:
-            print("KeyError")
+            message = (
+                "[KeyError]\n"
+                "Key List: [name, AT, BT, WT, TT, NTT]"
+            )
+            return message
