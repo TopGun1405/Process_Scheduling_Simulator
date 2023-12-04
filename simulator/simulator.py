@@ -1,3 +1,5 @@
+from collections import deque
+
 from process import Process
 from processor import Processor
 
@@ -6,8 +8,8 @@ class Simulator:
     def __init__(self) -> None:
         self.currentState = None
         self.timeQuantum = 0
-        self.allProcess = []
-        self.allProcessor = [Processor(name="Processor 1")]
+        self.allProcess = deque([])
+        self.allProcessor = deque([Processor(name="Processor 1")])
 
     def __str__(self) -> str:
         text = "Process: {0}\nProcessor: {1}\n".format(
@@ -32,3 +34,20 @@ class Simulator:
             name=f"Processor {len(self.allProcessor) + 1}"
         )
         self.allProcessor.append(newProcessor)
+
+    def addProcessToProcessor(self) -> None:
+        copyProcess = self.allProcess[::]
+        i = 0
+        while not copyProcess:
+            for processor in self.allProcessor:
+                if not processor.finishedProcessList:
+                    processor.readyQueue.append(copyProcess.popleft())
+                    break
+                else:
+                    pass
+                pass
+            if not self.allProcessor[i].finishedProcessList:
+                pass
+
+    def startSimulate(self):
+        pass
