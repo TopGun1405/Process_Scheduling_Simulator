@@ -21,11 +21,6 @@ def main():
     #     print(p)
 
     newSimulator = Simulator()
-    print(newSimulator)
-    newSimulator.addProcess()
-    print(newSimulator)
-    newSimulator.addProcessor()
-    print(newSimulator)
 
 
 if __name__ == "__main__":
