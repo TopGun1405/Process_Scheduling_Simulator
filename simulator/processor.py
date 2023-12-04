@@ -1,3 +1,6 @@
+from collections import deque
+
+
 priority = {
     0: "Ecore",
     1: "Pcore"
@@ -6,9 +9,11 @@ priority = {
 
 class Processor:
     def __init__(self, name="Processor N"):
-        self.readyQueue = []
         self.name = name
         self.priority = priority[0]
+
+        self.readyQueue = deque([])
+        self.finishedProcessList = []
 
     def __len__(self) -> int:
         return len(self.readyQueue)
@@ -24,6 +29,9 @@ class Processor:
         return text
 
     def __getitem__(self, item):
+        pass
+
+    def isProcessing(self) -> bool:
         pass
 
     def processing(self):
