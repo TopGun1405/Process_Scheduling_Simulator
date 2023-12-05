@@ -25,7 +25,7 @@ class Process:
         )
         return text
 
-    def __getitem__(self, key=str) -> any:
+    def __getitem__(self, key: str) -> any:
         info = {
             'name': self.name,
             'AT': self.arrival_time,
