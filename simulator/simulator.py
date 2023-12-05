@@ -29,6 +29,9 @@ class Simulator:
         )
         self.allProcess.append(newProcess)
 
+    def removeProcess(self, process: Process) -> None:
+        self.allProcess.remove(process)
+
     def addProcessor(self) -> None:
         newProcessor = Processor(
             name=f"Processor {len(self.allProcessor) + 1}"
@@ -36,18 +39,19 @@ class Simulator:
         self.allProcessor.append(newProcessor)
 
     def addProcessToProcessor(self) -> None:
-        copyProcess = self.allProcess[::]
+        copyProcess = self.allProcess[:]
         i = 0
-        while not copyProcess:
-            for processor in self.allProcessor:
-                if not processor.finishedProcessList:
-                    processor.readyQueue.append(copyProcess.popleft())
-                    break
-                else:
-                    pass
-                pass
-            if not self.allProcessor[i].finishedProcessList:
-                pass
+        # while not copyProcess:
+        #     for processor in self.allProcessor:
+        #         if not processor.finishedProcessList:
+        #             processor.readyQueue.append(copyProcess.popleft())
+        #             break
+        #         else:
+        #             pass
+        #         pass
+        #     if not self.allProcessor[i].finishedProcessList:
+        #         pass
+        self.allProcessor[0].add(copyProcess.popleft())
 
     def startSimulate(self):
         pass
