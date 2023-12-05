@@ -8,7 +8,7 @@ priority = {
 
 
 class Processor:
-    def __init__(self, name="Processor N"):
+    def __init__(self, name="Processor N") -> None:
         self.name = name
         self.priority = priority[0]
 
@@ -28,14 +28,14 @@ class Processor:
         )
         return text
 
-    def __getitem__(self, item):
+    def __getitem__(self, item) -> None:
         pass
 
     def isProcessing(self) -> bool:
         pass
 
-    def processing(self):
+    def processing(self) -> None:
         pass
 
-    def add(self, process):
+    def add(self, process) -> None:
         self.readyQueue.append(process)
