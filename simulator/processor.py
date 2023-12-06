@@ -1,5 +1,7 @@
 from collections import deque
 
+from algorithm import FCFS
+
 
 priority = {
     0: "Ecore",
@@ -35,7 +37,7 @@ class Processor:
         pass
 
     def processing(self) -> None:
-        pass
+        FCFS(self.readyQueue.popleft())
 
     def add(self, process) -> None:
         self.readyQueue.append(process)
