@@ -1,14 +1,18 @@
+from process import Process
 from processor import Processor
 
 
-def first_come_first_served(processor: Processor) -> int:
+def first_come_first_served(process: Process) -> Process:
+    AT = process.arrival_time
+    BT = process.burst_time
+    WT = process.waiting_time
     turnAround_time = 0
 
-    return turnAround_time
+    return process
 
 
-# def FCFS(process: Process):
-#     first_come_first_served(process)
+def FCFS(process: Process):
+    first_come_first_served(process)
 
 
 def round_robin():
