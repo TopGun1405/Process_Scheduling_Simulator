@@ -1,14 +1,14 @@
+from collections import deque
+
 from process import Process
 from processor import Processor
 
 
-def first_come_first_served(process: Process) -> Process:
-    AT = process.arrival_time
-    BT = process.burst_time
-    WT = process.waiting_time
+def first_come_first_served(queue: deque[Process]) -> None:
+
     turnAround_time = 0
 
-    return process
+    pass
 
 
 def FCFS(process: Process):
