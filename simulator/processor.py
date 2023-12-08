@@ -15,7 +15,7 @@ class Processor:
         self.priority = priority[0]
 
         self.readyQueue = deque([])
-        self.finishedProcessList = []
+        self.endProcessList = []
 
     def __len__(self) -> int:
         return len(self.readyQueue)
@@ -37,7 +37,7 @@ class Processor:
         pass
 
     def processing(self) -> None:
-        FCFS(self.readyQueue.popleft())
+        FCFS(self.readyQueue, self.endProcessList)
 
     def add(self, process) -> None:
         self.readyQueue.append(process)
