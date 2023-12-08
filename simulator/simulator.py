@@ -23,11 +23,17 @@ class Simulator:
     def changeToEcoreFirst(self) -> None:
         pass
 
-    def addProcess(self) -> None:
-        newProcess = Process(
-            name=f"P{len(self.allProcess) + 1}"
-        )
-        self.allProcess.append(newProcess)
+    def addProcess(self, *args) -> None:
+        if not args:
+            newProcess = Process(
+                name=f"P{len(self.allProcess) + 1}"
+            )
+            self.allProcess.append(newProcess)
+            self.allProcessor[0].readyQueue.append(newProcess)
+        else:
+            for process in args:
+                self.allProcess.append(process)
+                self.allProcessor[0].readyQueue.append(process)
 
     def removeProcess(self, process: Process) -> None:
         self.allProcess.remove(process)
@@ -54,4 +60,4 @@ class Simulator:
         self.allProcessor[0].add(copyProcess.popleft())
 
     def startSimulate(self):
-        pass
+        self.allProcessor[0].processing()
