@@ -1,18 +1,32 @@
 from collections import deque
 
 from process import Process
-from processor import Processor
 
 
-def first_come_first_served(queue: deque[Process]) -> None:
+def first_come_first_served(readyQueue: deque[Process], endList: list[Process]) -> None:
 
-    turnAround_time = 0
+    runtime = 0
+    while readyQueue:
+        Pn = readyQueue.popleft()
 
-    pass
+        if not endList:
+            Pn.turnAround_time = Pn.burst_time
+        else:
+            latest_TT = endList[-1].turnAround_time
+            if latest_TT > Pn.arrival_time:
+                Pn.waiting_time = latest_TT - Pn.arrival_time
+            Pn.turnAround_time = runtime + Pn.burst_time
+
+        Pn.normalized_turnAround_time = Pn.turnAround_time / Pn.burst_time
+        runtime += Pn.burst_time
+        endList.append(Pn)
+
+    print("\n".join(map(str, endList)))
+    return None
 
 
-def FCFS(process: Process):
-    first_come_first_served(process)
+def FCFS(readyQueue: deque[Process], endList: list[Process]):
+    first_come_first_served(readyQueue, endList)
 
 
 def round_robin():
