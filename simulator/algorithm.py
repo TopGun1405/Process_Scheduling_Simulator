@@ -8,17 +8,18 @@ def first_come_first_served(readyQueue: deque[Process], endList: list[Process]) 
     runtime = 0
     while readyQueue:
         Pn = readyQueue.popleft()
+        AT, BT = Pn.arrival_time, Pn.burst_time
 
         if not endList:
-            Pn.turnAround_time = Pn.burst_time
+            Pn.turnAround_time = BT
         else:
             latest_TT = endList[-1].turnAround_time
-            if latest_TT > Pn.arrival_time:
-                Pn.waiting_time = latest_TT - Pn.arrival_time
-            Pn.turnAround_time = runtime + Pn.burst_time
+            if latest_TT > AT:
+                Pn.waiting_time = latest_TT - AT
+            Pn.turnAround_time = runtime + BT
 
-        Pn.normalized_turnAround_time = Pn.turnAround_time / Pn.burst_time
-        runtime += Pn.burst_time
+        Pn.normalized_turnAround_time = Pn.turnAround_time / BT
+        runtime += BT
         endList.append(Pn)
 
     print("\n".join(map(str, endList)))
