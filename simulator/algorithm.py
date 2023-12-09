@@ -3,9 +3,11 @@ from collections import deque
 from process import Process
 
 
-def first_come_first_served(readyQueue: deque[Process], endList: list[Process]) -> None:
+def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
 
     runtime = 0
+    endList: list[Process] = []
+
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn.arrival_time, Pn.burst_time
@@ -23,43 +25,52 @@ def first_come_first_served(readyQueue: deque[Process], endList: list[Process]) 
         endList.append(Pn)
 
     print("\n".join(map(str, endList)))
-    return None
+    return endList
 
 
-def FCFS(readyQueue: deque[Process], endList: list[Process]):
-    first_come_first_served(readyQueue, endList)
+def FCFS(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = first_come_first_served(readyQueue)
+    return endList
 
 
-def round_robin():
-    pass
+def round_robin(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = []
+    return endList
 
 
-# def RR():
-#     round_robin()
+def RR(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = round_robin(readyQueue)
+    return endList
 
 
-def shortest_job_first():
-    pass
+def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = []
+    return endList
 
 
-# def SJF():
-#     shortest_job_first()
+def SJF(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = shortest_job_first(readyQueue)
+    return endList
 
 
-def shortest_remaining_time_next():
-    pass
+def shortest_remaining_time_next(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = []
+    return endList
 
 
-# def SRTN():
-#     shortest_remaining_time_next()
+def SRTN(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = shortest_remaining_time_next(readyQueue)
+    return endList
 
 
-def high_response_ratio_next():
-    pass
+def high_response_ratio_next(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = []
+    return endList
 
 
-# def HRRN():
-#     high_response_ratio_next()
+def HRRN(readyQueue: deque[Process]) -> list[Process]:
+    endList: list[Process] = high_response_ratio_next(readyQueue)
+    return  endList
 
 
 if __name__ == "__main__":
