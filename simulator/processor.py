@@ -1,6 +1,6 @@
 from collections import deque
 
-from algorithm import FCFS
+from algorithm import FCFS, RR, SJF, SRTN, HRRN
 
 
 priority = {
@@ -37,7 +37,7 @@ class Processor:
         pass
 
     def processing(self) -> None:
-        FCFS(self.readyQueue, self.endProcessList)
+        self.endProcessList.append(FCFS(self.readyQueue))
 
     def add(self, process) -> None:
         self.readyQueue.append(process)
