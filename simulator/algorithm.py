@@ -33,13 +33,13 @@ def FCFS(readyQueue: deque[Process]) -> list[Process]:
     return endList
 
 
-def round_robin(readyQueue: deque[Process]) -> list[Process]:
+def round_robin(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
     endList: list[Process] = []
     return endList
 
 
-def RR(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = round_robin(readyQueue)
+def RR(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
+    endList: list[Process] = round_robin(readyQueue, timeQuantum)
     return endList
 
 
@@ -70,7 +70,7 @@ def high_response_ratio_next(readyQueue: deque[Process]) -> list[Process]:
 
 def HRRN(readyQueue: deque[Process]) -> list[Process]:
     endList: list[Process] = high_response_ratio_next(readyQueue)
-    return  endList
+    return endList
 
 
 if __name__ == "__main__":
