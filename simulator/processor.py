@@ -30,7 +30,7 @@ class Processor:
         )
         return text
 
-    def __getitem__(self, item) -> None:
+    def __getitem__(self, item: str | int) -> str | int:
         pass
 
     def isProcessing(self) -> bool:
