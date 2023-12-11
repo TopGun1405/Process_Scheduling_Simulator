@@ -8,19 +8,22 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
     runtime = 0
     endList: list[Process] = []
 
+    readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
         Pn = readyQueue.popleft()
-        AT, BT = Pn.arrival_time, Pn.burst_time
+        AT, BT = Pn['AT'], Pn['BT']
 
         if not endList:
-            Pn.turnAround_time = BT
+            Pn['TT'] = BT
         else:
-            latest_TT = endList[-1].turnAround_time
+            latest_TT = endList[-1]['TT']
             if latest_TT > AT:
-                Pn.waiting_time = latest_TT - AT
-            Pn.turnAround_time = runtime + BT
+                Pn['WT'] = latest_TT - AT
+            else:
+                runtime += AT - latest_TT
+            Pn['TT'] = runtime + BT
 
-        Pn.normalized_turnAround_time = Pn.turnAround_time / BT
+        Pn['NTT'] = Pn['TT'] / BT
         runtime += BT
         endList.append(Pn)
 
@@ -39,8 +42,9 @@ def round_robin(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
     runtime = 0
     endList: list[Process] = []
 
+    readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
-        pass
+        Pn = readyQueue.popleft()
 
     return endList
 
@@ -56,8 +60,10 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
     runtime = 0
     endList: list[Process] = []
 
+    readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
-        pass
+        Pn = readyQueue.popleft()
+        AT, BT = Pn['AT'], Pn['BT']
 
     return endList
 
@@ -73,8 +79,9 @@ def shortest_remaining_time_next(readyQueue: deque[Process]) -> list[Process]:
     runtime = 0
     endList: list[Process] = []
 
+    readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
-        pass
+        Pn = readyQueue.popleft()
 
     return endList
 
@@ -90,8 +97,9 @@ def high_response_ratio_next(readyQueue: deque[Process]) -> list[Process]:
     runtime = 0
     endList: list[Process] = []
 
+    readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
-        pass
+        Pn = readyQueue.popleft()
 
     return endList
 
