@@ -21,12 +21,17 @@ def main():
     #     print(p)
 
     newSimulator = Simulator()
+
     p1 = Process(name="P1", arrival_time=0, burst_time=3)
     p2 = Process(name="P2", arrival_time=1, burst_time=7)
     p3 = Process(name="P3", arrival_time=3, burst_time=2)
     p4 = Process(name="P4", arrival_time=5, burst_time=5)
     p5 = Process(name="P5", arrival_time=6, burst_time=3)
+
     newSimulator.addProcess(p1, p2, p3, p4, p5)
+
+    print(newSimulator.allProcessor[0])
+
     newSimulator.startSimulate()
 
 
