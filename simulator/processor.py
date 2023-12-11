@@ -6,7 +6,7 @@ from algorithm import *
 from algorithm import FCFS, RR, SJF, SRTN, HRRN
 
 
-priority = {
+velocity = {
     'Ecore': 1,
     'Pcore': 2
 }
@@ -17,14 +17,21 @@ class Processor:
                  name=f"Processor {uuid4()}",
                  core="Ecore",
                  timeQuantum=2) -> None:
+
         self.name = name
         self.core = core
-        self.priority = priority['Ecore']
-        self.runtime = 0
         self.timeQuantum = timeQuantum
+        self.velocity = velocity[self.core]
+        self.runtime = 0
 
         self.readyQueue: deque[Process] = deque([])
-        self.endProcessList: list[list[Process]] = []
+        self.endProcessList: dict[str, list[Process]] = {
+            'FCFS': [],
+            'RR': [],
+            'SJF': [],
+            'SRTN': [],
+            'HRRN': []
+        }
 
     def __len__(self) -> int:
         return len(self.readyQueue)
@@ -45,15 +52,33 @@ class Processor:
         )
         return text
 
-    def __getitem__(self, item: str | int) -> str | int:
-        pass
+    def __getitem__(self, key: str | int) -> str | int:
+        info = {
+            'name': self.name,
+            'core': self.core,
+            'runtime': self.runtime,
+            'timeQuantum': self.timeQuantum,
+
+            0: self.name,
+            1: self.core,
+            2: self.runtime,
+            3: self.timeQuantum
+        }
+        try:
+            return info[key]
+        except KeyError:
+            pass
 
     def isProcessing(self) -> bool:
         pass
 
     def processing(self) -> None:
-        self.endProcessList.append(FCFS(self.readyQueue))
-        self.endProcessList.append(RR(self.readyQueue, timeQuantum=self.timeQuantum))
+        print()
+        self.endProcessList['FCFS'] = FCFS(self.readyQueue)
+        self.endProcessList['RR'] = RR(self.readyQueue, self.timeQuantum)
+        self.endProcessList['SJF'] = SJF(self.readyQueue)
+        self.endProcessList['SRTN'] = SRTN(self.readyQueue)
+        self.endProcessList['HRRN'] = HRRN(self.readyQueue)
 
-    def add(self, process: Process) -> None:
+    def addProcess(self, process: Process) -> None:
         self.readyQueue.append(process)
