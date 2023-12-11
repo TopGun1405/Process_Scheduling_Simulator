@@ -1,6 +1,16 @@
 from uuid import uuid1
 
 
+attr_names = {
+    'name': 'name',
+    'AT': 'arrival_time',
+    'BT': 'burst_time',
+    'WT': 'waiting_time',
+    'TT': 'turnAround_time',
+    'NTT': 'normalized_turnAround_time',
+}
+
+
 class Process:
     def __init__(self,
                  name=f"P{uuid1()}",
@@ -32,51 +42,23 @@ class Process:
         return text
 
     def __getitem__(self, key: str | int) -> str | int:
-        info = {
-            'name': self.name,
-            'AT': self.arrival_time,
-            'BT': self.burst_time,
-            'WT': self.waiting_time,
-            'TT': self.turnAround_time,
-            'NTT': self.normalized_turnAround_time,
-        }
         try:
-            return info[key]
-
+            return self.__getattribute__(attr_names[key])
         except KeyError:
             message = (
                 "[KeyError]\n"
-                "Process Name   : name\n"
-                "Arrival Time   : AT\n"
-                "Burst Time     : BT\n"
-                "Waiting Time   : WT\n"
-                "TurnAround Time: TT\n"
-                "Normalized TT  : NTT"
+                "key list: [name, AT, BT, WT, TT, NTT]"
             )
             return message
 
     def __setitem__(self,
                     key: str | int,
                     value: str | int | float) -> None:
-        names = {
-            'name': 'name',
-            'AT': 'arrival_time',
-            'BT': 'burst_time',
-            'WT': 'waiting_time',
-            'TT': 'turnAround_time',
-            'NTT': 'normalized_turnAround_time',
-        }
         try:
-            self.__setattr__(names[key], value)
-
+            self.__setattr__(attr_names[key], value)
         except KeyError:
             message = (
                 "[KeyError]\n"
-                "Process Name   : name\n"
-                "Arrival Time   : AT\n"
-                "Burst Time     : BT\n"
-                "Waiting Time   : WT\n"
-                "TurnAround Time: TT\n"
-                "Normalized TT  : NTT"
+                "key list: [name, AT, BT, WT, TT, NTT]"
             )
             print(message)
