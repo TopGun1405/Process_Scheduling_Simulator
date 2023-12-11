@@ -1,9 +1,9 @@
-from uuid import uuid4
+from uuid import uuid1
 
 
 class Process:
     def __init__(self,
-                 name=f"P{uuid4()}",
+                 name=f"P{uuid1()}",
                  arrival_time=0,
                  burst_time=0) -> None:
         self.name = name
