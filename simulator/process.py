@@ -39,24 +39,44 @@ class Process:
             'WT': self.waiting_time,
             'TT': self.turnAround_time,
             'NTT': self.normalized_turnAround_time,
-
-            0: self.name,
-            1: self.arrival_time,
-            2: self.burst_time,
-            3: self.waiting_time,
-            4: self.turnAround_time,
-            5: self.normalized_turnAround_time
         }
         try:
             return info[key]
+
         except KeyError:
             message = (
                 "[KeyError]\n"
-                "Process Name   : (name or 0)\n"
-                "Arrival Time   : (AT or 1)\n"
-                "Burst Time     : (BT or 2)\n"
-                "Waiting Time   : (WT or 3)\n"
-                "TurnAround Time: (TT or 4)\n"
-                "Normalized TT  : (NTT or 5)"
+                "Process Name   : name\n"
+                "Arrival Time   : AT\n"
+                "Burst Time     : BT\n"
+                "Waiting Time   : WT\n"
+                "TurnAround Time: TT\n"
+                "Normalized TT  : NTT"
             )
             return message
+
+    def __setitem__(self,
+                    key: str | int,
+                    value: str | int | float) -> None:
+        names = {
+            'name': 'name',
+            'AT': 'arrival_time',
+            'BT': 'burst_time',
+            'WT': 'waiting_time',
+            'TT': 'turnAround_time',
+            'NTT': 'normalized_turnAround_time',
+        }
+        try:
+            self.__setattr__(names[key], value)
+
+        except KeyError:
+            message = (
+                "[KeyError]\n"
+                "Process Name   : name\n"
+                "Arrival Time   : AT\n"
+                "Burst Time     : BT\n"
+                "Waiting Time   : WT\n"
+                "TurnAround Time: TT\n"
+                "Normalized TT  : NTT"
+            )
+            print(message)
