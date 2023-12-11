@@ -1,5 +1,11 @@
+from uuid import uuid4
+
+
 class Process:
-    def __init__(self, name="Pn", arrival_time=0, burst_time=0) -> None:
+    def __init__(self,
+                 name=f"P{uuid4()}",
+                 arrival_time=0,
+                 burst_time=0) -> None:
         self.name = name
         self.arrival_time = arrival_time
         self.burst_time = burst_time
