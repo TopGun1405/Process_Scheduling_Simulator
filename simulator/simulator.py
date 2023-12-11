@@ -61,7 +61,7 @@ class Simulator:
         #         pass
         #     if not self.allProcessor[i].finishedProcessList:
         #         pass
-        self.allProcessor[0].add(copyProcess.popleft())
+        self.allProcessor[0].addProcess(copyProcess.popleft())
 
     def startSimulate(self) -> None:
         self.allProcessor[0].processing()
