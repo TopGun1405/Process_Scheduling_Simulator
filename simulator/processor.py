@@ -1,18 +1,20 @@
 from collections import deque
 
+from algorithm import *
 from algorithm import FCFS, RR, SJF, SRTN, HRRN
 
 
 priority = {
-    0: "Ecore",
-    1: "Pcore"
+    'Ecore': 1,
+    'Pcore': 2
 }
 
 
 class Processor:
     def __init__(self, name="Processor N") -> None:
         self.name = name
-        self.priority = priority[0]
+        self.priority = priority['Ecore']
+        self.runtime = 0
 
         self.readyQueue = deque([])
         self.endProcessList = []
