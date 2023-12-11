@@ -26,11 +26,7 @@ class Process:
     def __str__(self) -> str:
         text = (
             "[Process Name: {0}] | "
-            "AT: {1}, "
-            "BT: {2}, "
-            "WT: {3}, "
-            "TT: {4}, "
-            "NTT: {5}"
+            "AT: {1}, BT: {2}, WT: {3}, TT: {4}, NTT: {5}"
         ).format(
             self.name,
             self.arrival_time,
