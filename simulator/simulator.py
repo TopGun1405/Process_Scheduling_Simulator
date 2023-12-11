@@ -7,7 +7,7 @@ from processor import Processor
 class Simulator:
     def __init__(self) -> None:
         self.currentState = None
-        self.timeQuantum = 0
+        self.timeQuantum = 2
         self.allProcess = deque([])
         self.allProcessor = deque([Processor(name="Processor 1")])
 
