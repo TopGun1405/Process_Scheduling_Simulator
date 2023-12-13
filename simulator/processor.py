@@ -11,6 +11,12 @@ velocity = {
     'Pcore': 2
 }
 
+attr_names = {
+    'name': 'name',
+    'core': 'core',
+    'timeQuantum': 'timeQuantum',
+}
+
 
 class Processor:
     def __init__(self,
@@ -39,33 +45,28 @@ class Processor:
     def __str__(self) -> str:
         text = (
             "[Processor Name: {0}]\n"
-            "Core: {1}\n"
-            "RunTime: {2}\n"
+            "Core: {1}, RunTime: {2}\n"
             "Process: {3}\n"
             "{4}"
         ).format(
             self.name,
-            self.core,
-            self.runtime,
+            self.core, self.runtime,
             len(self.readyQueue),
             "\n".join(map(lambda process: "\t" + str(process), self.readyQueue))
         )
         return text
 
     def __getitem__(self, key: str | int) -> str | int:
-        info = {
-            'name': self.name,
-            'core': self.core,
-            'runtime': self.runtime,
-            'timeQuantum': self.timeQuantum,
-
-            0: self.name,
-            1: self.core,
-            2: self.runtime,
-            3: self.timeQuantum
-        }
         try:
-            return info[key]
+            return self.__getattribute__(attr_names[key])
+        except KeyError:
+            pass
+
+    def __setitem__(self,
+                    key: str | int,
+                    value: str | int) -> None:
+        try:
+            self.__setattr__(attr_names[key], value)
         except KeyError:
             pass
 
