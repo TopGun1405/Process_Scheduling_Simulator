@@ -45,6 +45,7 @@ def round_robin(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
         Pn = readyQueue.popleft()
+        AT, BT = Pn['AT'], Pn['BT']
 
     return endList
 
@@ -82,6 +83,7 @@ def shortest_remaining_time_next(readyQueue: deque[Process]) -> list[Process]:
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
         Pn = readyQueue.popleft()
+        AT, BT = Pn['AT'], Pn['BT']
 
     return endList
 
@@ -100,6 +102,7 @@ def high_response_ratio_next(readyQueue: deque[Process]) -> list[Process]:
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     while readyQueue:
         Pn = readyQueue.popleft()
+        AT, BT = Pn['AT'], Pn['BT']
 
     return endList
 
