@@ -60,7 +60,10 @@ class Processor:
         try:
             return self.__getattribute__(attr_names[key])
         except KeyError:
-            pass
+            message = (
+                "[KeyError]"
+            )
+            return message
 
     def __setitem__(self,
                     key: str | int,
