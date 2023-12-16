@@ -2,12 +2,12 @@ from uuid import uuid1
 
 
 attr_names = {
-    'name': 'name',
-    'AT': 'arrival_time',
-    'BT': 'burst_time',
-    'WT': 'waiting_time',
-    'TT': 'turnAround_time',
-    'NTT': 'normalized_turnAround_time',
+    'name': "name",
+    'AT': "arrival_time",
+    'BT': "burst_time",
+    'WT': "waiting_time",
+    'TT': "turnAround_time",
+    'NTT': "normalized_turnAround_time"
 }
 
 
