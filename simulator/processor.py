@@ -12,9 +12,9 @@ velocity = {
 }
 
 attr_names = {
-    'name': 'name',
-    'core': 'core',
-    'timeQuantum': 'timeQuantum',
+    'name': "name",
+    'core': "core",
+    'timeQuantum': "timeQuantum",
 }
 
 
@@ -71,7 +71,9 @@ class Processor:
         try:
             self.__setattr__(attr_names[key], value)
         except KeyError:
-            pass
+            message = (
+                "[KeyError]"
+            )
 
     def isProcessing(self) -> bool:
         pass
@@ -79,9 +81,13 @@ class Processor:
     def processing(self) -> None:
         print()
         self.endProcessList['FCFS'] = FCFS(self.readyQueue)
+        print()
         self.endProcessList['RR'] = RR(self.readyQueue, self.timeQuantum)
+        print()
         self.endProcessList['SJF'] = SJF(self.readyQueue)
+        print()
         self.endProcessList['SRTN'] = SRTN(self.readyQueue)
+        print()
         self.endProcessList['HRRN'] = HRRN(self.readyQueue)
 
     def addProcess(self, process: Process) -> None:
