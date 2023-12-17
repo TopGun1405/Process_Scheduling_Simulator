@@ -79,15 +79,22 @@ class Processor:
         pass
 
     def processing(self) -> None:
-        print()
+        print("=" * 100)
+        print("FCFS")
         self.endProcessList['FCFS'] = FCFS(self.readyQueue)
-        print()
+        print("\n".join(map(lambda p: "\t" + str(p), self.endProcessList['FCFS'])))
+        # print("=" * 100)
+        # print("RR")
         # self.endProcessList['RR'] = RR(self.readyQueue, self.timeQuantum)
-        # print()
-        # self.endProcessList['SJF'] = SJF(self.readyQueue)
-        # print()
+        print("=" * 100)
+        print("SJF")
+        self.endProcessList['SJF'] = SJF(self.readyQueue)
+        print("\n".join(map(lambda p: "\t" + str(p), self.endProcessList['SJF'])))
+        # print("=" * 100)
+        # print("SRTN")
         # self.endProcessList['SRTN'] = SRTN(self.readyQueue)
-        # print()
+        # print("=" * 100)
+        # print("HRRN")
         # self.endProcessList['HRRN'] = HRRN(self.readyQueue)
 
     def addProcess(self, process: Process) -> None:
