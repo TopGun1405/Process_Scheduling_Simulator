@@ -16,18 +16,16 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
         if not endList:
             Pn['TT'] = BT
         else:
-            latest_TT = endList[-1]['TT']
-            if latest_TT > AT:
+            if runtime >= AT:
                 Pn['WT'] = runtime - AT
             else:
-                runtime += AT - latest_TT
+                runtime += AT - runtime
             Pn['TT'] = Pn['WT'] + BT
 
         Pn['NTT'] = Pn['TT'] / BT
         runtime += BT
         endList.append(Pn)
 
-    print("\n".join(map(str, endList)))
     return endList
 
 
@@ -60,40 +58,50 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
     endList: list[Process] = []
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
-    arrivedJob, shortestJob = [], deque()
+    shortestJob = []
     while readyQueue:
 
         while readyQueue:
             Pn = readyQueue.popleft()
             if Pn['AT'] <= runtime:
-                arrivedJob.append(Pn)
+                shortestJob.append(Pn)
             else:
                 readyQueue.appendleft(Pn)
                 break
 
-        shortestJob = deque(sorted(arrivedJob, key=lambda k: k['BT']))
-        print("=" * 80)
-        print("\n".join(map(str, shortestJob)))
-        print("=" * 80)
-        while shortestJob:
-            Pn = shortestJob.popleft()
-            AT, BT = Pn['AT'], Pn['BT']
+        shortestJob.sort(key=lambda k: k['BT'], reverse=True)
+        Pn = shortestJob.pop()
+        AT, BT = Pn['AT'], Pn['BT']
 
-            if not endList:
-                Pn['TT'] = BT
+        if not endList:
+            Pn['TT'] = BT
+        else:
+            if runtime >= AT:
+                Pn['WT'] = runtime - AT
             else:
-                latest_TT = endList[-1]['TT']
-                if latest_TT > AT:
-                    Pn['WT'] = runtime - AT
-                else:
-                    runtime += AT - latest_TT
-                Pn['TT'] = Pn['WT'] + BT
+                runtime += AT - runtime
+            Pn['TT'] = Pn['WT'] + BT
 
-            Pn['NTT'] = Pn['TT'] / BT
-            runtime += BT
-            endList.append(Pn)
+        Pn['NTT'] = Pn['TT'] / BT
+        runtime += BT
+        endList.append(Pn)
 
-    print("\n".join(map(str, endList)))
+    while shortestJob:
+        Pn = shortestJob.pop()
+        AT, BT = Pn['AT'], Pn['BT']
+
+        if runtime >= AT:
+            Pn['WT'] = runtime - AT
+        else:
+            runtime += AT - runtime
+        Pn['TT'] = Pn['WT'] + BT
+
+        Pn['NTT'] = Pn['TT'] / BT
+        runtime += BT
+        endList.append(Pn)
+
+    endList.sort(key=lambda k: k['AT'])
+
     return endList
 
 
