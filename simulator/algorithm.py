@@ -13,15 +13,12 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
 
-        if not endList:
-            Pn['TT'] = BT
+        if runtime >= AT:
+            Pn['WT'] = runtime - AT
         else:
-            if runtime >= AT:
-                Pn['WT'] = runtime - AT
-            else:
-                runtime += AT - runtime
-            Pn['TT'] = Pn['WT'] + BT
+            runtime += AT - runtime
 
+        Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
         runtime += BT
         endList.append(Pn)
@@ -73,15 +70,13 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
         Pn = shortestJob.pop()
         AT, BT = Pn['AT'], Pn['BT']
 
-        if not endList:
-            Pn['TT'] = BT
-        else:
+        if endList:
             if runtime >= AT:
                 Pn['WT'] = runtime - AT
             else:
                 runtime += AT - runtime
-            Pn['TT'] = Pn['WT'] + BT
 
+        Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
         runtime += BT
         endList.append(Pn)
@@ -94,8 +89,8 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
             Pn['WT'] = runtime - AT
         else:
             runtime += AT - runtime
-        Pn['TT'] = Pn['WT'] + BT
 
+        Pn['TT'] = Pn['WT'] + BT
         Pn['NTT'] = Pn['TT'] / BT
         runtime += BT
         endList.append(Pn)
