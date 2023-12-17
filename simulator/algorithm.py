@@ -13,14 +13,11 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
 
-        if runtime >= AT:
-            Pn['WT'] = runtime - AT
-        else:
-            runtime += AT - runtime
-
+        Pn['WT'] = (runtime - AT) if runtime >= AT else 0
         Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
-        runtime += BT
+        
+        runtime += BT + (0 if runtime >= AT else AT - runtime)
         endList.append(Pn)
 
     return endList
