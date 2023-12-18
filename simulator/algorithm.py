@@ -9,6 +9,9 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
     endList: list[Process] = []
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
+    timeStamp: dict[Process, dict[str, int]] = {
+        process: {'START': 0, 'END': 0} for process in readyQueue
+    }
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
@@ -17,7 +20,9 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
         Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
 
+        timeStamp[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
+        timeStamp[Pn]['END'] = runtime
         endList.append(Pn)
 
     return endList
@@ -35,11 +40,13 @@ def round_robin(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     copiedBT = {pn: pn['BT'] for pn in readyQueue}
+    timeStamp: dict[Process, list[dict[str, int]]] = {
+        process: [] for process in readyQueue
+    }
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
 
-        Pn['BT'] -= timeQuantum
         if BT > timeQuantum:
             Pn['BT'] -= timeQuantum
             readyQueue.append(Pn)
@@ -69,6 +76,9 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     shortestJob = []
+    timeStamp: dict[Process, dict[str, int]] = {
+        process: {'START': 0, 'END': 0} for process in readyQueue
+    }
     while readyQueue:
 
         while readyQueue:
@@ -87,7 +97,9 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
         Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
 
+        timeStamp[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
+        timeStamp[Pn]['END'] = runtime
         endList.append(Pn)
 
     while shortestJob:
@@ -98,7 +110,9 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
         Pn['TT'] = Pn['WT'] + BT
         Pn['NTT'] = Pn['TT'] / BT
 
+        timeStamp[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
+        timeStamp[Pn]['END'] = runtime
         endList.append(Pn)
 
     endList.sort(key=lambda k: k['AT'])
