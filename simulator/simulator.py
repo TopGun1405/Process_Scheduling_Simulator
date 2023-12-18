@@ -4,6 +4,12 @@ from process import Process
 from processor import Processor
 
 
+config = {
+    'MAX_PROCESS': 15,
+    'MAX_PROCESSOR': 4
+}
+
+
 class Simulator:
     def __init__(self) -> None:
         self.currentState = None
