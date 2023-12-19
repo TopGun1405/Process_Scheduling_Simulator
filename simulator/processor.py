@@ -74,6 +74,7 @@ class Processor:
             message = (
                 "[KeyError]"
             )
+            print(message)
 
     def isProcessing(self) -> bool:
         pass
