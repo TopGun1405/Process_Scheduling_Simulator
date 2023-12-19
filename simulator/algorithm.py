@@ -9,7 +9,7 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
     endList: list[Process] = []
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
-    timeStamp: dict[Process, dict[str, int]] = {
+    timeStamps: dict[Process, dict[str, int]] = {
         process: {'START': 0, 'END': 0} for process in readyQueue
     }
     while readyQueue:
@@ -20,9 +20,9 @@ def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
         Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
 
-        timeStamp[Pn]['START'] = runtime
+        timeStamps[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
-        timeStamp[Pn]['END'] = runtime
+        timeStamps[Pn]['END'] = runtime
         endList.append(Pn)
 
     return endList
@@ -40,26 +40,51 @@ def round_robin(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     copiedBT = {pn: pn['BT'] for pn in readyQueue}
-    timeStamp: dict[Process, list[dict[str, int]]] = {
+    timeStamps: dict[Process, list[dict[str, int]]] = {
         process: [] for process in readyQueue
     }
+    rotateQueue = deque()
     while readyQueue:
-        Pn = readyQueue.popleft()
+        while readyQueue:
+            Pn = readyQueue.popleft()
+            if Pn['AT'] <= runtime:
+                rotateQueue.append(Pn)
+            else:
+                readyQueue.appendleft(Pn)
+                break
+
+        Pn = rotateQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
+
+        timeStamp = {'START': 0, 'END': 0}
 
         if BT > timeQuantum:
             Pn['BT'] -= timeQuantum
-            readyQueue.append(Pn)
+
+            timeStamp['START'] = runtime
+            timeStamp['END'] = timeStamp['START'] + timeQuantum
+
+            rotateQueue.append(Pn)
+            timeStamps[Pn].append(timeStamp)
         else:
+            timeStamp['START'] = runtime
+            timeStamp['END'] = runtime + BT
+            timeStamps[Pn].append(timeStamp)
+
+            wt = sum(map(lambda t: t['END'] - t['START'], timeStamps[Pn]))
+            print(Pn, wt)
+
             Pn['BT'] = copiedBT[Pn]
-            Pn['WT'] = (runtime - AT) if runtime >= AT else 0
+            Pn['WT'] = wt + ((runtime - AT) if runtime >= AT else 0)
             Pn['TT'] = Pn['BT'] + (0 if not endList else Pn['WT'])
             Pn['NTT'] = Pn['TT'] / Pn['BT']
+
             endList.append(Pn)
 
         runtime += timeQuantum if BT > timeQuantum else BT
 
     endList.sort(key=lambda k: k['AT'])
+    print(timeStamps)
 
     return endList
 
@@ -76,11 +101,10 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
     shortestJob = []
-    timeStamp: dict[Process, dict[str, int]] = {
+    timeStamps: dict[Process, dict[str, int]] = {
         process: {'START': 0, 'END': 0} for process in readyQueue
     }
     while readyQueue:
-
         while readyQueue:
             Pn = readyQueue.popleft()
             if Pn['AT'] <= runtime:
@@ -97,9 +121,9 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
         Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
 
-        timeStamp[Pn]['START'] = runtime
+        timeStamps[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
-        timeStamp[Pn]['END'] = runtime
+        timeStamps[Pn]['END'] = runtime
         endList.append(Pn)
 
     while shortestJob:
@@ -110,9 +134,9 @@ def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
         Pn['TT'] = Pn['WT'] + BT
         Pn['NTT'] = Pn['TT'] / BT
 
-        timeStamp[Pn]['START'] = runtime
+        timeStamps[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
-        timeStamp[Pn]['END'] = runtime
+        timeStamps[Pn]['END'] = runtime
         endList.append(Pn)
 
     endList.sort(key=lambda k: k['AT'])
@@ -152,6 +176,8 @@ def high_response_ratio_next(readyQueue: deque[Process]) -> list[Process]:
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
+
+        responseRatio = (Pn['WT'] + BT) / BT
 
     return endList
 
