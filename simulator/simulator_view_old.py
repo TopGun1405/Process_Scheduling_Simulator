@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout
 from simulator import Simulator
 
 
-class SimulatorView(QWidget):
+class OldSimulatorView(QWidget):
     def __init__(self):
         super().__init__()
 
@@ -19,5 +19,5 @@ class SimulatorView(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = SimulatorView()
+    window = OldSimulatorView()
     sys.exit(app.exec())
