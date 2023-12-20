@@ -32,11 +32,10 @@ class Processor:
 
         self.readyQueue: deque[Process] = deque([])
         self.endProcessList: dict[str, list[Process]] = {
-            'FCFS': [],
-            'RR': [],
-            'SJF': [],
-            'SRTN': [],
-            'HRRN': []
+            'FCFS': [], 'RR': [], 'SJF': [], 'SRTN': [], 'HRRN': []
+        }
+        self.timeStamps: dict[str, list[dict | list]] = {
+            'FCFS': [], 'RR': [], 'SJF': [], 'SRTN': [], 'HRRN': []
         }
 
     def __len__(self) -> int:
@@ -61,7 +60,8 @@ class Processor:
             return self.__getattribute__(attr_names[key])
         except KeyError:
             message = (
-                "[KeyError]"
+                "[KeyError]\n"
+                "key list: [name, AT, BT, WT, TT, NTT]"
             )
             return message
 
@@ -72,7 +72,8 @@ class Processor:
             self.__setattr__(attr_names[key], value)
         except KeyError:
             message = (
-                "[KeyError]"
+                "[KeyError]\n"
+                "key list: [name, AT, BT, WT, TT, NTT]"
             )
             print(message)
 
