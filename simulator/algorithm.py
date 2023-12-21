@@ -29,7 +29,7 @@ def FCFS(readyQueue: deque[Process]) -> list[Process]:
 
 
 def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = first_come_first_served(readyQueue)
+    endList: list[Process] = FCFS(readyQueue)
     return endList
 
 
@@ -90,7 +90,7 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
 
 
 def round_robin(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
-    endList: list[Process] = round_robin(readyQueue, timeQuantum)
+    endList: list[Process] = RR(readyQueue, timeQuantum)
     return endList
 
 
@@ -145,7 +145,7 @@ def SJF(readyQueue: deque[Process]) -> list[Process]:
 
 
 def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = shortest_job_first(readyQueue)
+    endList: list[Process] = SJF(readyQueue)
     return endList
 
 
@@ -163,7 +163,7 @@ def SRTN(readyQueue: deque[Process]) -> list[Process]:
 
 
 def shortest_remaining_time_next(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = shortest_remaining_time_next(readyQueue)
+    endList: list[Process] = SRTN(readyQueue)
     return endList
 
 
@@ -183,7 +183,7 @@ def HRRN(readyQueue: deque[Process]) -> list[Process]:
 
 
 def high_response_ratio_next(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = high_response_ratio_next(readyQueue)
+    endList: list[Process] = HRRN(readyQueue)
     return endList
 
 
