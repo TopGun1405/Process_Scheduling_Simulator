@@ -9,7 +9,7 @@ def FCFS(readyQueue: deque[Process]) -> list[Process]:
     endList: list[Process] = []
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
-    timeStamps: dict[Process, dict[str, int]] = {
+    timeStamps: dict[Process, dict] = {
         process: {'START': 0, 'END': 0} for process in readyQueue
     }
     while readyQueue:
