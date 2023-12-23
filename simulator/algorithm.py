@@ -3,34 +3,29 @@ from collections import deque
 from process import Process
 
 
-def FCFS(readyQueue: deque[Process]) -> list[Process]:
+def FCFS(readyQueue: deque[Process]) -> tuple[list, dict]:
 
     runtime = 0
     endList: list[Process] = []
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
-    timeStamps: dict[Process, dict] = {
+    timeStamps: dict[Process, dict[str, int]] = {
         process: {'START': 0, 'END': 0} for process in readyQueue
     }
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
+        timeStamps[Pn]['START'] = runtime
 
         Pn['WT'] = (runtime - AT) if runtime >= AT else 0
         Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
 
-        timeStamps[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
         timeStamps[Pn]['END'] = runtime
         endList.append(Pn)
 
-    return endList
-
-
-def first_come_first_served(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = FCFS(readyQueue)
-    return endList
+    return endList, timeStamps
 
 
 def RR(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
@@ -116,12 +111,12 @@ def SJF(readyQueue: deque[Process]) -> list[Process]:
         shortestJob.sort(key=lambda k: k['BT'], reverse=True)
         Pn = shortestJob.pop()
         AT, BT = Pn['AT'], Pn['BT']
+        timeStamps[Pn]['START'] = runtime
 
         Pn['WT'] = (runtime - AT) if runtime >= AT else 0
         Pn['TT'] = BT + (0 if not endList else Pn['WT'])
         Pn['NTT'] = Pn['TT'] / BT
 
-        timeStamps[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
         timeStamps[Pn]['END'] = runtime
         endList.append(Pn)
@@ -129,12 +124,12 @@ def SJF(readyQueue: deque[Process]) -> list[Process]:
     while shortestJob:
         Pn = shortestJob.pop()
         AT, BT = Pn['AT'], Pn['BT']
+        timeStamps[Pn]['START'] = runtime
 
         Pn['WT'] = (runtime - AT) if runtime >= AT else 0
         Pn['TT'] = Pn['WT'] + BT
         Pn['NTT'] = Pn['TT'] / BT
 
-        timeStamps[Pn]['START'] = runtime
         runtime += BT + (0 if runtime >= AT else AT - runtime)
         timeStamps[Pn]['END'] = runtime
         endList.append(Pn)
