@@ -37,7 +37,7 @@ class Process:
         )
         return text
 
-    def __getitem__(self, key: str | int) -> str | int:
+    def __getitem__(self, key: str) -> str | int | float:
         try:
             return self.__getattribute__(attr_names[key])
         except KeyError:
@@ -48,7 +48,7 @@ class Process:
             return message
 
     def __setitem__(self,
-                    key: str | int,
+                    key: str,
                     value: str | int | float) -> None:
         try:
             self.__setattr__(attr_names[key], value)
