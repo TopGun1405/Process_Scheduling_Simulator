@@ -55,25 +55,25 @@ class Processor:
         )
         return text
 
-    def __getitem__(self, key: str | int) -> str | int:
+    def __getitem__(self, key: str) -> str | int:
         try:
             return self.__getattribute__(attr_names[key])
         except KeyError:
             message = (
                 "[KeyError]\n"
-                "key list: [name, AT, BT, WT, TT, NTT]"
+                "key list: [name, core, timeQuantum]"
             )
             return message
 
     def __setitem__(self,
-                    key: str | int,
+                    key: str,
                     value: str | int) -> None:
         try:
             self.__setattr__(attr_names[key], value)
         except KeyError:
             message = (
                 "[KeyError]\n"
-                "key list: [name, AT, BT, WT, TT, NTT]"
+                "key list: [name, core, timeQuantum]"
             )
             print(message)
 
@@ -83,7 +83,7 @@ class Processor:
     def processing(self) -> None:
         print("=" * 100)
         print("FCFS")
-        self.endProcessList['FCFS'] = FCFS(self.readyQueue)
+        self.endProcessList['FCFS'], self.timeStamps['FCFS'] = FCFS(self.readyQueue)
         print("\n".join(map(lambda p: "\t" + str(p), self.endProcessList['FCFS'])))
         print("=" * 100)
         print("RR")
