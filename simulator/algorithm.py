@@ -84,11 +84,6 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
     return endList
 
 
-def round_robin(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
-    endList: list[Process] = RR(readyQueue, timeQuantum)
-    return endList
-
-
 def SJF(readyQueue: deque[Process]) -> list[Process]:
 
     runtime = 0
@@ -139,11 +134,6 @@ def SJF(readyQueue: deque[Process]) -> list[Process]:
     return endList
 
 
-def shortest_job_first(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = SJF(readyQueue)
-    return endList
-
-
 def SRTN(readyQueue: deque[Process]) -> list[Process]:
 
     runtime = 0
@@ -154,11 +144,6 @@ def SRTN(readyQueue: deque[Process]) -> list[Process]:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
 
-    return endList
-
-
-def shortest_remaining_time_next(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = SRTN(readyQueue)
     return endList
 
 
@@ -174,11 +159,6 @@ def HRRN(readyQueue: deque[Process]) -> list[Process]:
 
         responseRatio = (Pn['WT'] + BT) / BT
 
-    return endList
-
-
-def high_response_ratio_next(readyQueue: deque[Process]) -> list[Process]:
-    endList: list[Process] = HRRN(readyQueue)
     return endList
 
 
