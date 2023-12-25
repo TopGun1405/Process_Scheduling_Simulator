@@ -28,7 +28,7 @@ def FCFS(readyQueue: deque[Process]) -> tuple[list, dict]:
     return endList, timeStamps
 
 
-def RR(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
+def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
 
     runtime = 0
     endList: list[Process] = []
@@ -81,10 +81,10 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> list[Process]:
     endList.sort(key=lambda k: k['AT'])
     print(timeStamps)
 
-    return endList
+    return endList, timeStamps
 
 
-def SJF(readyQueue: deque[Process]) -> list[Process]:
+def SJF(readyQueue: deque[Process]) -> tuple[list, dict]:
 
     runtime = 0
     endList: list[Process] = []
@@ -131,35 +131,41 @@ def SJF(readyQueue: deque[Process]) -> list[Process]:
 
     endList.sort(key=lambda k: k['AT'])
 
-    return endList
+    return endList, timeStamps
 
 
-def SRTN(readyQueue: deque[Process]) -> list[Process]:
+def SRTN(readyQueue: deque[Process]) -> tuple[list, dict]:
 
     runtime = 0
     endList: list[Process] = []
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
+    timeStamps: dict[Process, list[dict[str, int]]] = {
+        process: [] for process in readyQueue
+    }
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
 
-    return endList
+    return endList, timeStamps
 
 
-def HRRN(readyQueue: deque[Process]) -> list[Process]:
+def HRRN(readyQueue: deque[Process]) -> tuple[list, dict]:
 
     runtime = 0
     endList: list[Process] = []
 
     readyQueue = deque(sorted(readyQueue, key=lambda k: k['AT']))
+    timeStamps: dict[Process, list[dict[str, int]]] = {
+        process: [] for process in readyQueue
+    }
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
 
         responseRatio = (Pn['WT'] + BT) / BT
 
-    return endList
+    return endList, timeStamps
 
 
 if __name__ == "__main__":
