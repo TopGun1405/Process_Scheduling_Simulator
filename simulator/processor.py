@@ -95,10 +95,10 @@ class Processor:
         print("\n".join(map(lambda p: "\t" + str(p), self.endProcessList['SJF'])))
         # print("=" * 100)
         # print("SRTN")
-        # self.endProcessList['SRTN'] = SRTN(self.readyQueue)
+        # self.endProcessList['SRTN'], self.timeStamps['SRTN'] = SRTN(self.readyQueue)
         # print("=" * 100)
         # print("HRRN")
-        # self.endProcessList['HRRN'] = HRRN(self.readyQueue)
+        # self.endProcessList['HRRN'], self.timeStamps['HRRN'] = HRRN(self.readyQueue)
 
     def addProcess(self, process: Process) -> None:
         self.readyQueue.append(process)
