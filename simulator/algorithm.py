@@ -50,19 +50,15 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
 
         Pn = rotateQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
-
-        timeStamp = {'START': 0, 'END': 0}
+        timeStamp = {'START': runtime, 'END': 0}
 
         if BT > timeQuantum:
             Pn['BT'] -= timeQuantum
 
-            timeStamp['START'] = runtime
             timeStamp['END'] = timeStamp['START'] + timeQuantum
-
             rotateQueue.append(Pn)
             timeStamps[Pn].append(timeStamp)
         else:
-            timeStamp['START'] = runtime
             timeStamp['END'] = runtime + BT
             timeStamps[Pn].append(timeStamp)
 
