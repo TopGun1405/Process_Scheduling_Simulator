@@ -158,6 +158,7 @@ def HRRN(readyQueue: deque[Process]) -> tuple[list, dict]:
     while readyQueue:
         Pn = readyQueue.popleft()
         AT, BT = Pn['AT'], Pn['BT']
+        timeStamp = {'START': runtime, 'END': 0}
 
         responseRatio = (Pn['WT'] + BT) / BT
 
