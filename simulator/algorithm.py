@@ -59,9 +59,6 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
             rotateQueue.append(Pn)
             timeStamps[Pn].append(timeStamp)
         else:
-            timeStamp['END'] = runtime + BT
-            timeStamps[Pn].append(timeStamp)
-
             wt = sum(map(lambda t: t['END'] - t['START'], timeStamps[Pn]))
             print(Pn, wt)
 
@@ -70,7 +67,9 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
             Pn['TT'] = Pn['BT'] + (0 if not endList else Pn['WT'])
             Pn['NTT'] = Pn['TT'] / Pn['BT']
 
+            timeStamp['END'] = runtime + BT
             endList.append(Pn)
+            timeStamps[Pn].append(timeStamp)
 
         runtime += timeQuantum if BT > timeQuantum else BT
 
