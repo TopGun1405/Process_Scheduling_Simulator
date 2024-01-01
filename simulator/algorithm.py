@@ -68,8 +68,8 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
             Pn['NTT'] = Pn['TT'] / Pn['BT']
 
             timeStamp['END'] = runtime + BT
-            endList.append(Pn)
             timeStamps[Pn].append(timeStamp)
+            endList.append(Pn)
 
         runtime += timeQuantum if BT > timeQuantum else BT
 
