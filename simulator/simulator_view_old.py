@@ -17,8 +17,9 @@ class OldSimulatorView(QMainWindow):
         centralWidget = QWidget()
 
         pane = QHBoxLayout()
-        processNameLineEdit = QLineEdit()
-        pane.addWidget(processNameLineEdit)
+        processName_LineEdit = QLineEdit()
+        processorName_LineEdit = QLineEdit()
+        pane.addWidget(processName_LineEdit)
 
         mainLayout.addLayout(pane)
         centralWidget.setLayout(mainLayout)
