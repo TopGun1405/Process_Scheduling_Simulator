@@ -18,8 +18,16 @@ class Simulator:
         self.allProcessor = deque([Processor(name="Processor 1")])
 
     def __str__(self) -> str:
-        text = "Process: {0}\nProcessor: {1}\n".format(
-            ", ".join(map(str, self.allProcess)), ", ".join(map(str, self.allProcessor))
+        text = (
+            "Process: {0}\n"
+            "Processor: {1}\n"
+            "timeQuantum: {2}\n"
+            "maximum Process, Processor: {3}, {4}"
+        ).format(
+            ", ".join(map(str, self.allProcess)),
+            ", ".join(map(str, self.allProcessor)),
+            self.timeQuantum,
+            config['MAX_PROCESS'], config['MAX_PROCESSOR']
         )
         return text
 
