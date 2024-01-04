@@ -19,6 +19,7 @@ class OldSimulatorView(QMainWindow):
         pane = QHBoxLayout()
         processName_LineEdit = QLineEdit()
         processorName_LineEdit = QLineEdit()
+        timeQuantum_LineEdit = QLineEdit()
         pane.addWidget(processName_LineEdit)
 
         mainLayout.addLayout(pane)
