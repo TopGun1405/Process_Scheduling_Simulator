@@ -85,17 +85,21 @@ class Processor:
         print("FCFS")
         self.endProcessList['FCFS'], self.timeStamps['FCFS'] = FCFS(self.readyQueue)
         print("\n".join(map(lambda p: "\t" + str(p), self.endProcessList['FCFS'])))
+
         print("=" * 100)
         print("RR")
         self.endProcessList['RR'], self.timeStamps['RR'] = RR(self.readyQueue, self.timeQuantum)
         print("\n".join(map(lambda p: "\t" + str(p), self.endProcessList['RR'])))
+
         print("=" * 100)
         print("SJF")
         self.endProcessList['SJF'], self.timeStamps['SJF'] = SJF(self.readyQueue)
         print("\n".join(map(lambda p: "\t" + str(p), self.endProcessList['SJF'])))
+
         # print("=" * 100)
         # print("SRTN")
         # self.endProcessList['SRTN'], self.timeStamps['SRTN'] = SRTN(self.readyQueue)
+
         # print("=" * 100)
         # print("HRRN")
         # self.endProcessList['HRRN'], self.timeStamps['HRRN'] = HRRN(self.readyQueue)
