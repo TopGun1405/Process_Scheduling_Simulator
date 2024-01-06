@@ -20,11 +20,15 @@ class Simulator:
     def __str__(self) -> str:
         text = (
             "Process: {0}\n"
-            "Processor: {1}\n"
-            "timeQuantum: {2}\n"
-            "maximum Process, Processor: {3}, {4}"
+            "{1}\n"
+            "Processor: {2}\n"
+            "{3}\n"
+            "timeQuantum: {4}\n"
+            "maximum Process, Processor: {5}, {6}"
         ).format(
+            len(self.allProcess),
             ", ".join(map(str, self.allProcess)),
+            len(self.allProcessor),
             ", ".join(map(str, self.allProcessor)),
             self.timeQuantum,
             config['MAX_PROCESS'], config['MAX_PROCESSOR']
