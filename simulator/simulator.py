@@ -27,9 +27,9 @@ class Simulator:
             "maximum Process, Processor: {5}, {6}"
         ).format(
             len(self.allProcess),
-            ", ".join(map(str, self.allProcess)),
+            ", ".join(map(lambda process: "\t" + str(process), self.allProcess)),
             len(self.allProcessor),
-            ", ".join(map(str, self.allProcessor)),
+            ", ".join(map(lambda processor: "\t" + str(processor), self.allProcessor)),
             self.timeQuantum,
             config['MAX_PROCESS'], config['MAX_PROCESSOR']
         )
