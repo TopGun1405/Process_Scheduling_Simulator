@@ -52,7 +52,7 @@ class Simulator:
         else:
             for process in args:
                 self.allProcess.append(process)
-
+                ####
                 self.allProcessor[0].readyQueue.append(process)
 
     def removeProcess(self, process: Process) -> None:
