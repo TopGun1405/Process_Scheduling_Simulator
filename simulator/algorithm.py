@@ -99,6 +99,7 @@ def SJF(readyQueue: deque[Process]) -> tuple[list, dict]:
                 break
 
         shortestJob.sort(key=lambda k: k['BT'], reverse=True)
+        
         Pn = shortestJob.pop()
         AT, BT = Pn['AT'], Pn['BT']
         timeStamps[Pn]['START'] = runtime
