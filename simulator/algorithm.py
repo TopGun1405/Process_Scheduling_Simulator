@@ -59,11 +59,11 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
             rotateQueue.append(Pn)
             timeStamps[Pn].append(timeStamp)
         else:
-            wt = sum(map(lambda t: t['END'] - t['START'], timeStamps[Pn]))
-            print(Pn, wt)
+            total_WT = sum(map(lambda t: t['END'] - t['START'], timeStamps[Pn]))
+            # print(Pn, total_WT)
 
             Pn['BT'] = copiedBT[Pn]
-            Pn['WT'] = wt + ((runtime - AT) if runtime >= AT else 0)
+            Pn['WT'] = total_WT + ((runtime - AT) if runtime >= AT else 0)
             Pn['TT'] = Pn['BT'] + (0 if not endList else Pn['WT'])
             Pn['NTT'] = Pn['TT'] / Pn['BT']
 
@@ -99,7 +99,7 @@ def SJF(readyQueue: deque[Process]) -> tuple[list, dict]:
                 break
 
         shortestJob.sort(key=lambda k: k['BT'], reverse=True)
-        
+
         Pn = shortestJob.pop()
         AT, BT = Pn['AT'], Pn['BT']
         timeStamps[Pn]['START'] = runtime
