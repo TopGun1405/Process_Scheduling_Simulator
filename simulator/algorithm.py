@@ -60,7 +60,6 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
             timeStamps[Pn].append(timeStamp)
         else:
             total_WT = sum(map(lambda t: t['END'] - t['START'], timeStamps[Pn]))
-            # print(Pn, total_WT)
 
             Pn['BT'] = copiedBT[Pn]
             Pn['WT'] = total_WT + ((runtime - AT) if runtime >= AT else 0)
