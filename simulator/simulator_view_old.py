@@ -20,8 +20,9 @@ class OldSimulatorView(QMainWindow):
         processName_LineEdit = QLineEdit()
         processorName_LineEdit = QLineEdit()
         timeQuantum_LineEdit = QLineEdit()
-        
+
         pane.addWidget(processName_LineEdit)
+        pane.addWidget(processorName_LineEdit)
 
         mainLayout.addLayout(pane)
         centralWidget.setLayout(mainLayout)
