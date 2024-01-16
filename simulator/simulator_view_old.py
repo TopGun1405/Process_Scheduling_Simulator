@@ -27,8 +27,8 @@ class OldSimulatorView(QMainWindow):
 
         mainLayout.addLayout(pane)
         centralWidget.setLayout(mainLayout)
-        self.setCentralWidget(centralWidget)
 
+        self.setCentralWidget(centralWidget)
         self.setWindowTitle("Process Scheduling Simulator")
         self.show()
 
