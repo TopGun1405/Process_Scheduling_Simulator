@@ -51,7 +51,7 @@ class Processor:
             self.name,
             self.core, self.runtime,
             len(self.readyQueue),
-            "\n".join(map(lambda process: "\t" + str(process), self.readyQueue))
+            ", ".join(map(lambda process: "\t" + str(process), self.readyQueue))
         )
         return text
 
