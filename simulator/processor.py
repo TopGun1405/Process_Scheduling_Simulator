@@ -77,9 +77,6 @@ class Processor:
             )
             print(message)
 
-    def isProcessing(self) -> bool:
-        pass
-
     def processing(self) -> None:
         print("=" * 100)
         print("FCFS")
