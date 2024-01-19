@@ -18,8 +18,14 @@ class OldSimulatorView(QMainWindow):
 
         pane = QHBoxLayout()
         processName_LineEdit = QLineEdit()
+        processName_LineEdit.clearFocus()
+        processName_LineEdit.setPlaceholderText("process name")
+
         processorName_LineEdit = QLineEdit()
+        processorName_LineEdit.setPlaceholderText("processor name")
+
         timeQuantum_LineEdit = QLineEdit()
+        timeQuantum_LineEdit.setPlaceholderText("timeQuantum")
 
         pane.addWidget(processName_LineEdit)
         pane.addWidget(processorName_LineEdit)
