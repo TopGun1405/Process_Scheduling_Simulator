@@ -7,7 +7,7 @@ from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout
 from simulator import Simulator
 
 
-class SimulatorView(QWidget):
+class SimulatorView(QMainWindow):
     def __init__(self):
         super().__init__()
 
