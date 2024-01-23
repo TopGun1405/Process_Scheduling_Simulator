@@ -16,6 +16,8 @@ class SimulatorView(QMainWindow):
         mainLayout = QVBoxLayout()
         centralWidget = QWidget()
 
+        pane = QHBoxLayout()
+
         self.setWindowTitle("Process Scheduling Simulator")
         self.show()
 
