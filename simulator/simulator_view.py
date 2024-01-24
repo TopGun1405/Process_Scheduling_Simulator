@@ -1,7 +1,7 @@
 import sys
 
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow
-from PyQt6.QtWidgets import QLabel, QPushButton
+from PyQt6.QtWidgets import QLabel, QPushButton, QLineEdit
 from PyQt6.QtWidgets import QVBoxLayout, QHBoxLayout
 
 from simulator import Simulator
