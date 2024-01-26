@@ -40,6 +40,9 @@ class OldSimulatorView(QMainWindow):
         self.setWindowTitle("Process Scheduling Simulator")
         self.show()
 
+    def changeConfig(self):
+        pass
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
