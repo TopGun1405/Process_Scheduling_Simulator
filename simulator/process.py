@@ -16,7 +16,7 @@ class Process:
                  name=f"P{uuid1()}",
                  arrival_time=0,
                  burst_time=0) -> None:
-        self.id = None
+        # self.id = None
         self.name = name
         self.arrival_time = arrival_time
         self.burst_time = burst_time
