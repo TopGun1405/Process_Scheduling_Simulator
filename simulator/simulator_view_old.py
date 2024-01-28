@@ -17,6 +17,7 @@ class OldSimulatorView(QMainWindow):
         centralWidget = QWidget()
 
         pane = QHBoxLayout()
+        
         processName_LineEdit = QLineEdit()
         processName_LineEdit.clearFocus()
         processName_LineEdit.deselect()
