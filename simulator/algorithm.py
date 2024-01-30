@@ -56,8 +56,8 @@ def RR(readyQueue: deque[Process], timeQuantum: int) -> tuple[list, dict]:
             Pn['BT'] -= timeQuantum
 
             timeStamp['END'] = timeStamp['START'] + timeQuantum
-            rotateQueue.append(Pn)
             timeStamps[Pn].append(timeStamp)
+            rotateQueue.append(Pn)
         else:
             total_WT = sum(map(lambda t: t['END'] - t['START'], timeStamps[Pn]))
 
