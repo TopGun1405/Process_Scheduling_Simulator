@@ -88,6 +88,7 @@ def SJF(readyQueue: deque[Process]) -> tuple[list, dict]:
     timeStamps: dict[Process, dict[str, int]] = {
         process: {'START': 0, 'END': 0} for process in readyQueue
     }
+    
     while readyQueue:
         while readyQueue:
             Pn = readyQueue.popleft()
